@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using MyLifeStory.API.Middleware;
 using MyLifeStory.BLL;
 using MyLifeStory.DAL;
 
@@ -32,6 +33,8 @@ namespace MyLifeStory.API
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            app.UseMiddleware<ExceptionHandleMiddleware>();
 
             app.UseHttpsRedirection();
 

@@ -10,6 +10,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\MyLifeStory.Entities\MyLifeStory.Entities.csproj" />
+    <ProjectReference Include="..\MyLifeStory.Shared\MyLifeStory.Shared.csproj" />
   </ItemGroup>
 
 </Project>

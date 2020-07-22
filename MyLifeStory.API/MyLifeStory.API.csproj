@@ -4,5 +4,11 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\MyLifeStory.BLL\MyLifeStory.BLL.csproj" />
+    <ProjectReference Include="..\MyLifeStory.Shared\MyLifeStory.Shared.csproj" />
+    <ProjectReference Include="..\MyLifeStory.ViewModels\MyLifeStory.ViewModels.csproj" />
+  </ItemGroup>
+
 
 </Project>
