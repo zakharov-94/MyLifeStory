@@ -5,10 +5,11 @@ namespace MyLifeStory.Entities.Identity
 {
     public class ApplicationRole : IdentityRole
     {
-        public ApplicationRole(string roleName) : base(roleName)
-        {
+        public ApplicationRole()
+        { }
 
-        }
+        public ApplicationRole(string roleName) : base(roleName)
+        { }
 
         public ICollection<ApplicationUserRole> UserRoles { get; set; }
     }

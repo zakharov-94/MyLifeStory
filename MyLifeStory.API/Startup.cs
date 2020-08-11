@@ -6,14 +6,27 @@ using Microsoft.Extensions.Hosting;
 using MyLifeStory.API.Middleware;
 using MyLifeStory.BLL;
 using MyLifeStory.DAL;
+using System;
 
 namespace MyLifeStory.API
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
+        private readonly IWebHostEnvironment _env;
+
+        public Startup(IWebHostEnvironment env)
         {
-            Configuration = configuration;
+            _env = env;
+
+            var builder = new ConfigurationBuilder()
+                .SetBasePath(env.ContentRootPath)
+                .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+                .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true, reloadOnChange: true)
+                .AddEnvironmentVariables();
+
+            Configuration = builder.Build();
+
+            Console.WriteLine("*Environment: {0}", env.EnvironmentName);
         }
 
         public IConfiguration Configuration { get; }
@@ -21,9 +34,11 @@ namespace MyLifeStory.API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers();
-            services.AddDataAccessLayerDependencies();
+            var appSettings = Configuration.GetSection("AppSettings");
+
+            services.AddDataAccessLayerDependencies(appSettings["ConnectionString"]);
             services.AddBusinessDependencies();
+            services.AddControllers();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using MyLifeStory.DAL.Repositories.Interfaces;
 
 namespace MyLifeStory.API.Controllers
 {
@@ -16,11 +17,11 @@ namespace MyLifeStory.API.Controllers
             "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
         };
 
-        private readonly ILogger<WeatherForecastController> _logger;
+        private readonly IBlogPostRepository _BlogPostRepository;
 
-        public WeatherForecastController(ILogger<WeatherForecastController> logger)
+        public WeatherForecastController(IBlogPostRepository BlogPostRepository)
         {
-            _logger = logger;
+            _BlogPostRepository = BlogPostRepository;
         }
 
         [HttpGet]
